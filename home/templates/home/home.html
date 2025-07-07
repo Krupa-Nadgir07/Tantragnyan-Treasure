@@ -1,0 +1,62 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<body class="bg-light">
+<div class="container py-5">
+    <div class="row g-4">
+        <!-- Column 1: Learners -->
+        <div class="col-lg-6">
+            <div class="card text-white bg-info mb-4 shadow">
+                <div class="card-header h5">Learner's Corner</div>
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Learning Made Easy</h4>
+                    <p class="card-text mb-4">Explore courses, resources, and learning paths to enhance your skills in competitive programming and other technical domains. Whether you're a beginner or an advanced learner, there's something for everyone.</p>
+                    <a href="{% url 'sign_up'%}" class="btn btn-light">Explore Learner Resources</a>
+                </div>
+            </div>
+            
+            <div class="card shadow">
+                <img src="{% static 'images/learners.gif' %}" alt="Learners Image" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Why Learners Choose Us:</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Access to a wide range of tutorials and learning materials</li>
+                        <li class="list-group-item">Engage in community discussions and study groups</li>
+                        <li class="list-group-item">Track your progress and set learning goals</li>
+                        <li class="list-group-item">Exclusive challenges to enhance problem-solving skills</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Column 2: Blogs -->
+        <div class="col-lg-6">
+            <div class="card text-white bg-success mb-4 shadow">
+                <div class="card-header h5">Blogging Platform</div>
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Share Knowledge, Share Ideas</h4>
+                    <p class="card-text mb-4">Dive into blogs that cover everything from coding tips to the latest in tech trends. Whether you want to share your knowledge or read insightful articles, our blogging platform has it all.</p>
+                    <a href="{% url 'create_blog_post'%}" class="btn btn-light">Read the Latest Blogs</a>
+                </div>
+            </div>
+            
+            <div class="card shadow">
+                <img src="{% static 'images/bloggers.gif' %}" alt="Blogs Image" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">Why Bloggers Choose Us:</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Reach a community of learners and professionals</li>
+                        <li class="list-group-item">Improve your writing and technical communication skills</li>
+                        <li class="list-group-item">Stay updated with industry trends and news</li>
+                        <li class="list-group-item">Get feedback and grow as a content creator</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

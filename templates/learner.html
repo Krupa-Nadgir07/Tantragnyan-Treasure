@@ -1,0 +1,275 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%block title%}<title> titleCP Learner Dashboard </title>{%endblock%}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link href="https://bootswatch.com/5/minty/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!-- Include Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJv3XlQ6ymXBtdPl8RzNRY0IUq1R2ly5tKr0l6RppUtbLsffwiFjmsfgTkqE" crossorigin="anonymous">
+
+<!-- Include Bootstrap JavaScript (required for modals and other components) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0nBf7ggb45R9gZ8/9b4LzGfq1D/hzFTztK4gHkNwWEXp6ksm" crossorigin="anonymous"></script>
+
+    <style>
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            padding: 48px 0 0;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+        }
+        .sidebar-sticky {
+            position: relative;
+            top: 0;
+            height: calc(100vh - 48px);
+            padding-top: .5rem;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+            #sidebar {
+        height: 100vh; /* Full height of viewport */
+        padding-top: 20px; /* Space at the top */
+    }
+
+    .nav-item .nav-link {
+        display: flex;
+        align-items: center;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .nav-item .nav-link:hover {
+        background-color: black; /* Darker gray for hover effect */
+        transform: scale(1.05); /* Slightly enlarge on hover */
+        text-decoration: none; /* Remove underline */
+    }
+
+    .nav-item .nav-link i {
+        font-size: 1.2rem; /* Slightly larger icon */
+    }
+
+    .nav-item {
+        margin-bottom: 10px; /* Space between items */
+    }
+
+    .position-sticky {
+        overflow-y: auto; /* Allow scrolling if content overflows */
+    }
+        .chart-container {
+            position: relative;
+            margin: auto;
+            height: 250px;
+            width: 250px;
+        }
+          .difficulty-badge {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 12px;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    color: #fff;
+  }
+
+  .difficulty-badge.easy {
+    background: linear-gradient(90deg, #56ab2f, #a8e063); /* Green Gradient */
+    box-shadow: 0 4px 6px rgba(86, 171, 47, 0.3);
+  }
+
+  .difficulty-badge.medium {
+    background: linear-gradient(90deg, #f7971e, #ffd200); /* Orange Gradient */
+    color: #333;
+    box-shadow: 0 4px 6px rgba(247, 151, 30, 0.3);
+  }
+
+  .difficulty-badge.hard {
+    background: linear-gradient(90deg, #e52d27, #b31217); /* Red Gradient */
+    box-shadow: 0 4px 6px rgba(229, 45, 39, 0.3);
+  }
+
+  .difficulty-badge i {
+    margin-right: 0.3rem;
+  }
+  body {
+            {% comment %} background-color: #f8f9fa; {% endcomment %}
+        }
+        .card {
+            position: relative;
+            background: white;
+            border: none;
+            {% comment %} border-radius: 15px; {% endcomment %}
+            overflow: hidden;
+            {% comment %} box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); {% endcomment %}
+        }
+        .diagonal {
+            position: absolute;
+            width: 200%;
+            height: 300%;
+            top: 0;
+            left: 0;
+            transform: rotate(45deg);
+            background: linear-gradient(to right, #78C2AD 50%, #f8f9fa 50%);
+            z-index: 1;
+        }
+        .advantage-circle {
+            width: 600px;
+            height: 600px;
+            position: relative;
+            margin: auto;
+            z-index: 2;
+        }
+        .center-image {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            {% comment %} box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); {% endcomment %}
+            z-index: 3;
+        }
+        .advantage {
+            position: absolute;
+            width: 150px;
+            height: 100px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1rem;
+            z-index: 3;
+        }
+        .advantage-1 { top: 5%; left: 5%; }
+        .advantage-2 { top: 5%; right: 5%; }
+        .advantage-3 { bottom: 5%; left: 5%; }
+        .advantage-4 { bottom: 5%; right: 5%; }
+        .card {
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-body {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.card-text {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+h4.card-title {
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: bold;
+}
+
+h5 {
+    font-size: 1.2rem;
+    color: #555;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.section-image {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #00171F;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.section-description {
+    font-size: 1.1rem;
+    color: #555;
+    text-align: justify;
+}
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+    <nav id="sidebar" class="col-md-5 col-lg-2 d-md-block sidebar collapse" style="background-color:#343A40">
+    <div class="position-sticky sidebar-sticky py-3">
+       <h5 class="text-white text-center pb-4">Welcome to Tantragnyan Treasure!</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white py-2 px-3 rounded" href="{% url 'dashboard' %}">
+                    <i class="bi bi-house-door me-2"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white py-2 px-3 rounded" href="{% url 'solved' %}">
+                    <i class="bi bi-check-circle me-2"></i>
+                    Solved
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white py-2 px-3 rounded" href="{% url 'attempted' %}">
+                    <i class="bi bi-hourglass-split me-2"></i>
+                    Attempted
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white py-2 px-3 rounded" href="{% url 'bookmarks' %}">
+                    <i class="bi bi-bookmark-star me-2"></i>
+                    Bookmarked
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white py-2 px-3 rounded" href="{% url 'create_study_group' %}">
+                    <i class="bi bi-people me-2"></i>
+                    Study Group
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white py-2 px-3 rounded" href="{% url 'my_domains' %}">
+                    <i class="bi bi-journal-text me-2"></i>
+                    Topics
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white py-2 px-3 rounded" href="{% url 'goals' %}">
+                    <i class="bi bi-flag me-2"></i>
+                    Goals
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white py-2 px-3 rounded" href="{% url 'home' %}">
+                   <i class="bi bi-house me-2"></i>
+                    Home 
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                
+            {% block content %}
+            {% endblock %}
+            </main>
+            </div>
+    </div>
+</body>

@@ -1,0 +1,87 @@
+{% extends "learner.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Plan an Activity</title>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-lg border-0 rounded">
+                <div class="card-header bg-primary text-black text-center">
+                    <h5 class="mb-0">Plan an Activity</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'plan_activity' %}" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="form-group mb-3">
+                            <label for="activityTitle" class="form-label">Activity Title</label>
+                            <input type="text" class="form-control" name="activityTitle" id="activityTitle" placeholder="Enter activity title" required>
+                            <div class="invalid-feedback">Please provide an activity title.</div>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label for="activityDescription" class="form-label">Description</label>
+                            <textarea class="form-control" name="activityDescription" id="activityDescription" rows="3" placeholder="Enter activity description" required></textarea>
+                            <div class="invalid-feedback">Please provide a description.</div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="activityDate" class="form-label">Date</label>
+                            <input type="text" class="form-control flatpickr-date" name="activityDate" id="activityDate" placeholder="Select date" required>
+                            <div class="invalid-feedback">Please select a valid date.</div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="activityTime" class="form-label">Time</label>
+                            <input type="text" class="form-control flatpickr-time" name="activityTime" id="activityTime" placeholder="Select time" required style="height:100%">
+                            <div class="invalid-feedback">Please select a valid time.</div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-block text-black">Submit Activity</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr(".flatpickr-date", {
+            enableTime: false,
+            dateFormat: "Y-m-d",
+        });
+
+        flatpickr(".flatpickr-time", {
+            noCalendar: true,
+            enableTime: true,
+            dateFormat: "H:i",
+        });
+    });
+
+    // Bootstrap validation script
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+{% endblock %}

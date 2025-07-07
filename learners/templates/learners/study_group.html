@@ -1,0 +1,122 @@
+{% extends "learner.html" %}
+{% load crispy_forms_tags %}
+{%load static%}
+{% block title %}
+    <title>My Study Group</title>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Main Content Section -->
+        <div class="col-lg-8" style="margin-top: 20px;">
+            <!-- Activities Card -->
+            <div class="card mb-4 shadow-sm border-0 rounded bt-8">
+                <div class="card-header bg-primary text-black">
+                    <h4 class="mb-0">Activities Planned</h4>
+                </div>
+                <div class="card-body">
+                    {% for activity in activities %}
+                        <div class="activity-card p-3 border rounded bg-light">
+                            {% for key, value in activity.items %}
+                               
+                                    <p class="mb-1"><strong>{{ key|capfirst }} : </strong>{{ value }}</p>
+                             
+                            {% endfor %}
+                        </div>
+                    {% empty %}
+                        <p class="text-muted">No activities available.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Meeting Details Card -->
+            <div class="card mb-4 shadow-sm border-0 rounded">
+                <div class="card-header bg-secondary text-black">
+                    <h4 class="mb-0">Meeting Details</h4>
+                </div>
+                <div class="card-body">
+                    {% if meet_info %}
+                        <div class="meeting-info p-3 border rounded bg-light">
+                            {% for key, value in meet_info.items %}
+                                {% if key == 'meeting_link' %}
+                                    <p class="mb-1"><strong>{{ key|capfirst }} :</strong> <a href="{{ value }}" target="_blank">{{ value }}</a></p>
+                                {% else %}
+                                    <p class="mb-1"><strong>{{ key|capfirst}} :</strong> {{ value }}</p>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-muted">No meeting information available.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="text-center">
+                <a href="{% url 'schedule_meeting' %}" class="btn btn-secondary me-2 text-black">Schedule a Meeting</a>
+                <a href="{% url 'plan_activity' %}" class="btn btn-primary text-black">Plan an Activity</a>
+            </div>
+        </div>
+
+        <!-- Sidebar for Messages -->
+<div class="col-lg-4">
+    <div class="position-fixed top-3 end-0 h-100 shadow-lg p-4 bg-dark" style="width: 350px; overflow-y: auto; background-color: white; padding-bottom: 80px;">
+        <h3 class="mb-4 text-white">Group Messages</h3>
+
+        <div class="message-container mb-4" style="max-height: 70%; overflow-y: auto;">
+            {% for message in group_messages %}
+                <div class="message-card mb-3 p-3 border rounded bg-white shadow-sm">
+                    {% for key, value in message.items %}
+                        <p class="mb-1"><strong>{{ key|capfirst }}:</strong> {{ value }}</p>
+                    {% endfor %}
+                </div>
+            {% empty %}
+                <p class="text-muted">No messages available.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Send Message Form (Sticks to Bottom of Sidebar) -->
+        <div style="position: absolute; bottom: 0; left: 0; width: 100%; background-color: white; border-top: 1px solid #ccc; padding: 10px;">
+            <form method="POST" action="{% url 'study_group' %}">
+                {% csrf_token %}
+                <div class="form-floating mb-2">
+                    <textarea name="message" class="form-control" id="message" rows="2" placeholder="Type your message here..." required></textarea>
+                    <label for="message">Send a message:</label>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary text-black">Send</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+<style>
+    .activity-card, .meeting-info {
+        transition: box-shadow 0.3s ease;
+    }
+
+    .activity-card:hover, .meeting-info:hover {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .message-container {
+        max-height: calc(100% - 200px);
+        overflow-y: auto;
+    }
+
+    .message-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .message-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+</style>
+{% endblock %}

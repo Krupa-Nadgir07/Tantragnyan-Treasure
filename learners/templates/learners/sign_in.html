@@ -1,0 +1,45 @@
+{% extends "main.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Sign In
+{% endblock %}
+
+{% block content %}
+<body class="bg-light">
+<div class="container-fluid  d-flex align-items-center justify-content-center" style="padding-top:60px;">
+    <div class="card shadow-sm" style="width: 100%; max-width: 600px;">
+        <div class="card-body p-4">
+            <h2 class="card-title text-center mb-4">SIGN IN</h2>
+            
+            {% if messages %}
+                <div class="alert alert-danger">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.username_or_email|as_crispy_field }}
+                </div>
+                <div class="mb-3">
+                    {{ form.password|as_crispy_field }}
+                </div>
+                <hr class="my-4">
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">SIGN IN</button>
+                </div>
+<div class="text-center mt-3">
+    <p>Don't have an account? <a href="{% url 'sign_up' %}">Create one</a></p>
+</div>
+
+            </form>
+            
+        </div>
+    </div>
+</div>
+</body>
+{% endblock %}

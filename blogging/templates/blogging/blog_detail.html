@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Add a descriptive summary of your page here.">
+    <meta name="author" content="Your Name or Organization">
+    <title>Blog List</title>
+    <!-- Bootstrap CSS and Bootswatch Minty Theme -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.0/minty/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-black" data-bs-theme="dark">
+        <div class="container-fluid justify-content-center align-item-center bg-black">
+            <h1 class="text-center text-white" href="#">Hope I'm imparting knowledge to you! Happy Reading!</h1>
+        </div>
+    </nav>
+     <nav class="navbar navbar-expand-lg navbar-dark bg-primary text-black">
+  <div class="container">
+    <div class="collapse navbar-collapse justify-content-evenly" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-black" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black" href="{% url 'sign_up'%}">Learner's Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black" href="{% url 'topics'%}">Read our Blogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black" href="{% url 'create_blog_post'%}">Create Blogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black" href="{% url 'dashboard'%}">Learner Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-black" href="{% url 'blog_list'%}">Admin Review</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">{{ blog.blog_title }}</h1>
+
+        <div class="blog card mb-4">
+            <div class="card-body">
+                {% comment %} <h2 class="card-title">{{ blog.blog_title }}</h2> {% endcomment %}
+                <!-- Render raw HTML content with |safe -->
+                <div class="blog-content">
+                    {{ blog.content|safe }}
+                </div>
+                <p class="text-muted mt-3">
+                    <small>Created on: {{ blog.blog_created_at }}</small>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (Optional) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

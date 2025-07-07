@@ -1,0 +1,66 @@
+{% extends "learner.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    New Goal
+{% endblock %}
+
+{% block content %}
+<body class="bg-light">
+    <h1 class="d-flex justify-content-center align-items-center">New Goal</h1>
+    <div class="d-flex justify-content-center align-items-center">
+    <div class="card text-center justify-content-center mb-4" style="width: 100%; max-width: 600px;">
+  <div class="card-header">
+    <h5 class="mb-0">Set your goal, and take control,<br>
+Achieve your dreams and rock 'n' roll!</h5>
+  </div>
+  <div class="card-body">
+    <form method="POST" class="mb-2">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="goal_type" class="form-label">Goal Type</label>
+        <select id="goal_type" name="goal_type" class="form-select" required>
+          <option value="">-- Select Goal Type --</option>
+          <option value="Daily">Daily</option>
+          <option value="Weekly">Weekly</option>
+          <option value="Monthly">Monthly</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="goal_description" class="form-label">Goal Description</label>
+        <textarea id="goal_description" name="goal_description" class="form-control" rows="3" required></textarea>
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="goal_start" class="form-label">Start Date</label>
+          <input type="text" id="goal_start" name="goal_start" class="form-control flatpickr" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="goal_end" class="form-label">End Date</label>
+          <input type="text" id="goal_end" name="goal_end" class="form-control flatpickr" required>
+        </div>
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-lg">Add Goal</button>
+      </div>
+    </form>
+  </div>
+  <div class="card-footer text-muted">
+    Goal Time!
+  </div>
+</div>
+</div>
+<!-- Add Flatpickr and Bootstrap Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Initialize Flatpickr
+    flatpickr(".flatpickr", {
+      dateFormat: "Y-m-d", // ISO format
+    });
+  });
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+</body>
+{% endblock %}

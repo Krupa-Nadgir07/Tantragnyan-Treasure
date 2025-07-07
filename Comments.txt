@@ -1,0 +1,6 @@
+# Dont save the domain stuff in the db yet as it is associated with learner as foreign key
+            domain_instance = domains_interested.save(commit=False)
+            # Link the learner with domain names and then say save
+            domain_instance.learner = learner
+            domain_instance.save()
+			

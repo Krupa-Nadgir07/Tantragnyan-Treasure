@@ -1,0 +1,39 @@
+{% extends "main.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+   Strong Weak Topics
+{% endblock %}
+
+{% block content %}
+<body class="bg-light">
+    <div class="container py-5">
+        <h1 class="text-center mb-5">Strong and Weak Topics, Rate yourself!</h1>
+        <form method="post" action="{% url 'strong_weak_topics' %}" class="bg-white p-4 rounded shadow">
+            {% csrf_token %}
+            
+            {% for topic in parent_topics %}
+                <div class="mb-4">
+                    <h3 class="mb-3">{{ topic.topic_name }}</h3>
+                    <div class="btn-group w-100" role="group" aria-label="Topic rating">
+                        <input type="radio" class="btn-check" name="topic_{{ topic.topic_id }}" id="strong_{{ topic.topic_id }}" value="Strong" autocomplete="off">
+                        <label class="btn btn-outline-success" for="strong_{{ topic.topic_id }}">Strong</label>
+
+                        <input type="radio" class="btn-check" name="topic_{{ topic.topic_id }}" id="medium_{{ topic.topic_id }}" value="Medium" autocomplete="off">
+                        <label class="btn btn-outline-warning" for="medium_{{ topic.topic_id }}">Medium</label>
+
+                        <input type="radio" class="btn-check" name="topic_{{ topic.topic_id }}" id="weak_{{ topic.topic_id }}" value="Weak" autocomplete="off">
+                        <label class="btn btn-outline-danger" for="weak_{{ topic.topic_id }}">Weak</label>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+{% endblock %}

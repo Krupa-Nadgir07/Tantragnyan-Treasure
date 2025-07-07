@@ -1,0 +1,88 @@
+{% extends "main.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Sign Up - CP Platforms
+{% endblock %}
+
+{% block content %}
+<body class="bg-light">
+    <div class="container min-vh-100 d-flex align-items-center justify-content-center">
+        <div class="card shadow-lg border-0" style="width: 100%; max-width: 1000px;">
+            <div class="card-body p-5">
+                <h2 class="card-title text-center mb-4 text-primary">CP Platforms Account Credentials</h2>
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="row g-4">
+                        <!-- Leetcode Card -->
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-primary text-white text-center">
+                                    <h4 class="card-title mb-0">Leetcode</h4>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <div class="mb-3">
+                                        {{ cp_form1.cp_username|as_crispy_field }}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{ cp_form1.password|as_crispy_field }}
+                                    </div>
+                                    <div class="text-center">
+                                        <a href="https://leetcode.com" class="btn btn-outline-primary">Don't have an account? Click here</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Codeforces Card -->
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-primary text-white text-center">
+                                    <h4 class="card-title mb-0">Codeforces</h4>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <div class="mb-3">
+                                        {{ cp_form3.cp_username|as_crispy_field }}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{ cp_form3.password|as_crispy_field }}
+                                    </div>
+                                    <div class="text-center">
+                                        <a href="https://codeforces.com" class="btn btn-outline-primary">Don't have an account? Click here</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Hackerearth Card -->
+                        <div class="col-md-6">
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-header bg-primary text-white text-center">
+                                    <h4 class="card-title mb-0">Hackerearth</h4>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <div class="mb-3">
+                                        {{ cp_form4.cp_username|as_crispy_field }}
+                                    </div>
+                                    <div class="mb-3">
+                                        {{ cp_form4.password|as_crispy_field }}
+                                    </div>
+                                    <div class="text-center">
+                                        <a href="https://hackerearth.com" class="btn btn-outline-primary">Don't have an account? Click here</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-4">
+                        <button type="submit" class="btn btn-primary px-4 py-2">SUBMIT</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

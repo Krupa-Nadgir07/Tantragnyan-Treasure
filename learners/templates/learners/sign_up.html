@@ -1,0 +1,69 @@
+{% extends "main.html" %}
+{% load crispy_forms_tags %}
+
+{% block custom_css %}
+<style>
+    .datepicker {
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block title %}
+    Sign Up
+{% endblock %}
+
+{% block content %}
+<body class="bg-light">
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center" style="padding-top:60px; padding-bottom:60px">
+    <div class="card shadow-sm" style="width: 100%; max-width: 600px;">
+        <div class="card-body p-4">
+            <h2 class="card-title text-center mb-4">SIGN UP</h2>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ user_form.username|as_crispy_field }}
+                </div>
+                <div class="mb-3">
+                    {{ learner_form.email_id|as_crispy_field }}
+                </div>
+                <div class="mb-3">
+                    {{ user_form.password|as_crispy_field }}
+                </div>
+                <div class="mb-3">
+                    {{ user_form.confirm_password|as_crispy_field }}
+                </div>
+                <div class="mb-3">
+                    {{ learner_form.date_of_birth|as_crispy_field }}
+                </div>
+                <div class="mb-3">
+                    {{ learner_form.preparing_for|as_crispy_field }}
+                </div>
+                <hr class="my-4">
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">SIGN UP</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Flatpickr CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr('.datepicker', {
+            dateFormat: 'Y-m-d',
+            disableMobile: true,
+            minDate: '1900-01-01',
+            maxDate: '2024-12-31',
+            allowInput: true,
+            weekNumbers: true,
+        });
+    });
+</script>
+</body>
+{% endblock %}

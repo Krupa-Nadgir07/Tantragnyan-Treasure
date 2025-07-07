@@ -1,0 +1,117 @@
+{% extends "main.html" %}
+
+{% block title %}
+    {{ main_topic.topic_name }}
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4 mb-3">{{ main_topic.topic_name }}</h1>
+            <p class="lead mb-5">{{ main_topic.short_description }}</p>
+        </div>
+    </div>
+<div class="container mt-2">
+    {% if companies %}
+        <div class="card border-primary mb-4">
+            <div class="card-body">
+                <h2 class="card-title text-primary mb-4 text-center">Top Companies asking for {{ main_topic.topic_name }}</h2>
+                
+                <!-- Full-width background div -->
+                <div class="bg-dark p-3 rounded">
+                    <div class="d-flex flex-wrap gap-3 justify-content-evenly">
+                        {% for company in companies %}
+                            <span class="badge bg-primary text-white company-badge p-3 fs-2 d-flex align-items-center">
+                                <i class="bi bi-building me-2"></i> {{ company }}
+                            </span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+
+
+    {% if sub_topics %}
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4">Subtopics</h2>
+            </div>
+            {% for sub_topic in sub_topics %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ sub_topic.topic_name }}</h5>
+                            <p class="card-text flex-grow-1">{{ sub_topic.short_description }}</p>
+                            <a href="{% url 'topic_page' sub_topic.topic_id %}" class="btn btn-primary mt-auto">
+                                View Subtopic
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% comment %} {% else %}
+        <div class="alert alert-info" role="alert">
+            No subtopics available.
+        </div> {% endcomment %}
+    {% endif %}
+
+    {% if topic_blogs %}
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="mb-4">Blogs</h2>
+            </div>
+            {% for blog in topic_blogs %}
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{% url 'blog_detail' blog_id=blog.blog_id %}" class="text-decoration-none">
+                                    {{ blog.blog_title }}
+                                </a>
+                            </h5>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <strong>Author:</strong> {{ blog.blog_author }} |
+                                    <strong>Created:</strong> {{ blog.blog_created_at|date:"F d, Y" }}
+                                </small>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <strong>Views :</strong> {{ blog.views }} |
+                                    <strong>Likes :</strong> {{ blog.likes }}
+                                    {% comment %} <strong>Reviewed:</strong>  {% endcomment %}
+                                    {% comment %} {% if blog.review_status %}
+                                        <span class="badge bg-success">Yes</span>
+                                    {% else %}
+                                        <span class="badge bg-warning text-dark">No</span>
+                                    {% endif %} {% endcomment %}
+                                </small>
+                            </p>
+                            <p class="card-text"><strong>Description:</strong> {{ blog.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% comment %} {% else %}
+        <div class="alert alert-info" role="alert">
+            No blogs available for this topic.
+        </div> {% endcomment %}
+    {% endif %}
+    <style>
+        .company-badge {
+            transition: all 0.3s ease;
+        }
+        .company-badge:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</div>
+{% endblock %}

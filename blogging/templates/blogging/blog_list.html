@@ -1,0 +1,44 @@
+{% extends "main.html" %}
+{% block title %}Blog Approval{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center text-primary mb-4">Pending Blogs for Review</h2>
+
+    {% if blogs %}
+    <div class="table-responsive">
+        <table class="table table-hover align-middle shadow-sm rounded">
+            <thead class="table-dark">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Content</th>
+                    <th>Approve</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for blog in blogs %}
+                <tr>
+                    <td class="fw-bold">{{ blog.blog_title }}</td>
+                    <td>{{ blog.blog_author }}</td>
+                    <td>
+                        <a href="{% url 'blog_detail' blog.blog_id %}" class="btn btn-info btn-sm">
+                            <i class="bi bi-eye"></i> View Content
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'approve_blog' blog.blog_id %}" class="btn btn-success btn-sm">
+                            <i class="bi bi-check-circle"></i> Approve
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <div class="alert alert-warning text-center">
+            <i class="bi bi-exclamation-circle"></i> No pending blogs for approval.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "learner.html" %}
+{% load crispy_forms_tags %}
+{%load static%}
+{% block title %}
+    <title>Create Study Group</title>
+{% endblock %}
+
+{% block content %}
+<div class="container py-3">
+    <h1 class="text-center mb-5">Discover the Power of Study Groups</h1>
+
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card p-2">
+                <div class="diagonal"></div>
+
+                <div class="advantage-circle">
+                    <img src="{% static 'images/study_group.gif' %}" alt="Study Group" class="center-image">
+
+                    <div class="advantage advantage-1 p-2 rounded" style="background-color:#F4F1BB;color:black">Understand<br> while you<br> teach!</div>
+                    <div class="advantage advantage-2 p-2 rounded" style="background-color:#F4F1BB;color:black">Collaborate!<br>Compete!<br>Achieve!</div>
+                    <div class="advantage advantage-3 p-2 rounded" style="background-color:#F4F1BB;color:black">Diverse Knowlegde<br>Gain!</div>
+                    <div class="advantage advantage-4 p-2 rounded" style="background-color:#F4F1BB;color:black">Enrich the power of Sharing perspectives!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <h2 class="mb-4">Ready to Boost Your Learning?</h2>
+        <p class="lead mb-4">Create a study group today and experience the benefits of collaborative learning!</p>
+        <form method="post" action="{% url 'create_study_group' %}">
+        {% csrf_token %}
+        <button class="btn btn-primary btn-lg" type="submit">Create a Study Group</button>
+        </form>
+    </div>
+</div>
+
+{%endblock%}

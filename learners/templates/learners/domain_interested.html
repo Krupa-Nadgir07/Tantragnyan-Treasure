@@ -1,0 +1,70 @@
+{% extends "main.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Sign Up
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+    <div class="card shadow-lg border-0 mb-4 mt-4" style="width: 100%; max-width: 800px; background-color:#f8f9fa;">
+        <div class="card-body p-5 ">
+            <h2 class="text-center text-black mb-4">Domains Interested Form</h2>
+            <form method="post" action="{% url 'domain_interested' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-check mb-3">
+                            <div class="alert alert-success d-flex align-items-center">
+                                <h4 class="form-check-label text-dark mb-0">Algorithms</h4>
+                                <input class="form-check-input ms-3" type="checkbox" name="items[]" value="Algorithms" id="flexCheckAlgorithms">
+                            </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <div class="alert alert-success d-flex align-items-center">
+                                <h4 class="form-check-label text-dark mb-0">Data Structures</h4>
+                                <input class="form-check-input ms-3" type="checkbox" name="items[]" value="Data Structures" id="flexCheckDataStructures">
+                            </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <div class="alert alert-success d-flex align-items-center">
+                                <h4 class="form-check-label text-dark mb-0">C++</h4>
+                                <input class="form-check-input ms-3" type="checkbox" name="items[]" value="C++" id="flexCheckCpp">
+                            </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <div class="alert alert-success d-flex align-items-center">
+                                <h4 class="form-check-label text-dark mb-0">Python</h4>
+                                <input class="form-check-input ms-3" type="checkbox" name="items[]" value="Python" id="flexCheckPython">
+                            </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <div class="alert alert-success d-flex align-items-center">
+                                <h4 class="form-check-label text-dark mb-0">Java</h4>
+                                <input class="form-check-input ms-3" type="checkbox" name="items[]" value="Java" id="flexCheckJava">
+                            </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <div class="alert alert-success d-flex align-items-center">
+                                <h4 class="form-check-label text-dark mb-0">Databases</h4>
+                                <input class="form-check-input ms-3" type="checkbox" name="items[]" value="Databases" id="flexCheckDatabases">
+                            </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <div class="alert alert-success d-flex align-items-center">
+                                <h4 class="form-check-label text-dark mb-0">Artificial Intelligence</h4>
+                                <input class="form-check-input ms-3" type="checkbox" name="items[]" value="Artificial Intelligence" id="flexCheckAI">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-flex justify-content-center mt-4 ">
+                    <button type="submit" class="btn btn-success btn-lg px-5 py-3">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

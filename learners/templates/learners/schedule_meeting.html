@@ -1,0 +1,87 @@
+{% extends "learner.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Schedule a Meeting</title>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-lg border-0 rounded">
+                <div class="card-header bg-secondary text-black text-center">
+                    <h5 class="mb-0">Schedule a Meeting</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'schedule_meeting' %}" class="needs-validation" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="form-group mb-3">
+                            <label for="meetingTitle" class="form-label">Meeting Title</label>
+                            <input type="text" class="form-control" name="meetingTitle" id="meetingTitle" placeholder="Enter meeting title" required>
+                            <div class="invalid-feedback">Please provide a meeting title.</div>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label for="meetingDate" class="form-label">Date</label>
+                            <input type="text" class="form-control flatpickr-date" name="meetingDate" id="meetingDate" placeholder="Select date" required>
+                            <div class="invalid-feedback">Please select a valid date.</div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="meetingTime" class="form-label">Time</label>
+                            <input type="text" class="form-control flatpickr-time" name="meetingTime" id="meetingTime" placeholder="Select time" required style="height:100%">
+                            <div class="invalid-feedback">Please select a valid time.</div>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label for="meetingLink" class="form-label">Meeting Link</label>
+                            <input type="url" class="form-control" name="meetingLink" id="meetingLink" placeholder="https://example.com" required>
+                            <div class="invalid-feedback">Please provide a valid URL.</div>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-secondary btn-block" style="color:black">Submit Meeting</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr(".flatpickr-date", {
+            enableTime: false,
+            dateFormat: "Y-m-d",
+        });
+
+        flatpickr(".flatpickr-time", {
+            noCalendar: true,
+            enableTime: true,
+            dateFormat: "H:i",
+        });
+    });
+
+    // Bootstrap validation script
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+{% endblock %}
