@@ -1,29 +1,29 @@
 # Tantragnyan Treasure  
 *A Competitive Programming Preparation Management System*
 
-## 📌 Overview
+## Overview
 
 **Tantragnyan Treasure** is a web-based platform designed to assist learners in competitive programming (CP) preparation. It offers centralized progress tracking, collaborative learning features, and content sharing through an integrated blogging system.
 
 ---
 
-## 🎯 Features
+## Features
 
-### 👨‍🎓 Learner Module
+### Learner Module
 - **Progress Tracking:** Visualizes attempted/solved problems across multiple CP platforms.
 - **Goal Setting:** Set and track daily, weekly, and monthly learning objectives.
 - **Bookmarking:** Save important problems for later review.
 - **Topic-wise Learning:** Study categorized topics and subtopics systematically.
 - **Study Groups:** Automatically generated using clustering algorithms for peer collaboration.
 
-### ✍️ Blogger Module
+### Blogger Module
 - **Blog Creation:** Rich-text blog editor with media and topic tagging.
 - **Pre-Blog Setup:** Add title, description, and topic before publishing.
 - **Content Display:** Organized under topics for structured browsing by learners.
 
 ---
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 ### Backend
 - Django (Python)
@@ -39,7 +39,7 @@
 
 ---
 
-## 🧠 Machine Learning
+## Machine Learning
 
 - Learner interests encoded as binary vectors.
 - Clustering via Agglomerative Clustering.
